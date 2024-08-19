@@ -1,0 +1,3 @@
+C:/Users/GML/Desktop/RaytracingInOneWeekend/build/CMakeFiles/InOneWeekend.dir
+C:/Users/GML/Desktop/RaytracingInOneWeekend/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/GML/Desktop/RaytracingInOneWeekend/build/CMakeFiles/ZERO_CHECK.dir

@@ -1,0 +1,3 @@
+C:/Users/user/OneDrive/바탕 화면/랩 인턴/RaytracingInOneWeekend/RaytracingInOneWeekend/build/CMakeFiles/InOneWeekend.dir
+C:/Users/user/OneDrive/바탕 화면/랩 인턴/RaytracingInOneWeekend/RaytracingInOneWeekend/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/user/OneDrive/바탕 화면/랩 인턴/RaytracingInOneWeekend/RaytracingInOneWeekend/build/CMakeFiles/ZERO_CHECK.dir
