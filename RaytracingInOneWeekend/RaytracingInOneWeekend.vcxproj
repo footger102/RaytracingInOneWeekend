@@ -109,6 +109,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\image.ppm"
+magick convert "C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\output.png"
+"C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -125,10 +130,18 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>"C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\image.ppm"
+magick convert "C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\output.png"
+"C:\Users\GML\source\repos\footger102\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="color.h" />
+    <ClInclude Include="hittable.h" />
+    <ClInclude Include="hittable_list.h" />
     <ClInclude Include="ray.h" />
+    <ClInclude Include="sphere.h" />
     <ClInclude Include="vec3.h" />
   </ItemGroup>
   <ItemGroup>
