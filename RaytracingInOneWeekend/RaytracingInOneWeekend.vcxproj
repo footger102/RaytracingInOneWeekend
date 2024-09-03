@@ -70,6 +70,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -82,9 +94,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command> "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
-magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
-"C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
+      <Command>"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
+magick "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
+"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -103,9 +115,9 @@ magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneW
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command> "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
-magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
-"C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
+      <Command>"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
+magick "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
+"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,9 +132,9 @@ magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneW
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command> "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
-magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
-"C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
+      <Command>"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
+magick "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
+"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,9 +153,9 @@ magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneW
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command> "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
-magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
-"C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
+      <Command>"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\RaytracingInOneWeekend.exe" &gt; "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm"
+magick "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\image.ppm" "C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"
+"C:\Users\footger\OneDrive\바탕 화면\랩 인턴\RaytracingInOneWeekend\x64\Debug\output.png"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -152,6 +164,7 @@ magick convert "C:\Users\user\OneDrive\바탕 화면\랩 인턴\RaytracingInOneW
     <ClInclude Include="hittable.h" />
     <ClInclude Include="hittable_list.h" />
     <ClInclude Include="interval.h" />
+    <ClInclude Include="material.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="rtweekend.h" />
     <ClInclude Include="sphere.h" />

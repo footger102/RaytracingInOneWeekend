@@ -19,7 +19,13 @@ public:
 		return min < x && x < max;
 	}
 
-	static const interval empty, universe;
+	double clamp(double x) const {
+		if (x < min) return min;
+		if (x > max) return max;
+		return x;
+	}
+
+	static const interval empty, universe; //all instance of interval class shares this static variable
 };
 
 const interval interval::empty = interval(infinity, -infinity);

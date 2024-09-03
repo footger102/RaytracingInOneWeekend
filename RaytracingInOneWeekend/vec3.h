@@ -38,6 +38,14 @@ public:
 	double norm() const {
 		return sqrt(norm_square());
 	}
+
+	static vec3 random_vec3() {
+		return vec3(random_double(), random_double(), random_double());
+	}
+
+	static vec3 random_vec3(double min, double max) {
+		return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
+	}
 };
 
 using point3 = vec3;
@@ -84,4 +92,20 @@ inline vec3 cross(const vec3& u, const vec3& v) {
 
 inline vec3 unit_vector(const vec3& v) {
 	return v / v.norm();
+}
+
+inline vec3 random_unit_vector() {
+	while (true) {
+		vec3 p = vec3::random_vec3(-1.0, 1.0);
+		double lensq = p.norm_square();
+		if (lensq <= 1.0) {
+			return p / sqrt(lensq);
+		}
+	}
+}
+
+inline vec3 random_on_hemisphere(const vec3& normal) {
+	vec3 on_unit_sphere = random_unit_vector();
+	if (dot(on_unit_sphere, normal) > 0.0) return on_unit_sphere;
+	else return -on_unit_sphere;
 }
