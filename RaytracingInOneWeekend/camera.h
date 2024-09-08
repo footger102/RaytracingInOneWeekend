@@ -2,6 +2,7 @@
 
 #include "rtweekend.h"
 #include "hittable.h"
+#include "material.h"
 
 using namespace std;
 
@@ -12,6 +13,14 @@ public:
 	int		image_width			= 100;
 	int		samples_per_pixel	= 10; //Count of random samples for each pixel
 	int		max_depth			= 10; //Maximum number of ray bounces into scene
+	
+	double	vfov				= 90;				//Vertical view angle(field of view)
+	point3	lookfrom			= point3(0, 0, 0);	//Point camera is looking from
+	point3	lookat				= point3(0, 0, -1); //Point camera is looking at
+	vec3	vup					= vec3(0, 1, 0);	//Camera-relative "up" direction
+
+	double defocus_angle		= 0; //Variation angle of rays through each pixel
+	double focus_dist			= 10;//Distance from camera lookfrom point to plane of perfect focus
 
 	void render(const hittable& world) {
 		initialize();
@@ -39,6 +48,9 @@ private:
 	point3	pixel00_loc;			//Location of pixel 0, 0
 	vec3	pixel_delta_u;			//Offset to pixel to the right
 	vec3	pixel_delta_v;			//Offset to pixel below
+	vec3	u, v, w;				//Camera frame basis vectors
+	vec3	defocus_disk_u;			//Defocus disk horizontal radius
+	vec3	defocus_disk_v;			//Defocus disk vertical radius
 
 	void initialize() {
 		image_height = int(image_width / aspect_ratio);
@@ -46,35 +58,47 @@ private:
 
 		pixel_samples_scale = 1.0 / samples_per_pixel;
 
-		center = point3(0, 0, 0);
+		center = lookfrom;
 
-		auto focal_length = 1.0;
-		auto viewport_height = 2.0;
+		//Determin viewport dimentions
+		//double focal_length = (lookfrom - lookat).norm();
+		double theta = degrees_to_radians(vfov);
+		double h = std::tan(theta / 2.0);
+		double viewport_height = 2 * h * focus_dist;
 		auto viewport_width = double(viewport_height * image_width / image_height); //viewport_width should be double type!!
 		auto camera_center = point3(0, 0, 0);
 
+		//Calculate the u,v,w unit basis vectors for the camera coordinate frame.
+		w = unit_vector(lookfrom - lookat); //pointing opposite the view direction
+		u = unit_vector(cross(vup, w)); //pointing to camera right
+		v = cross(w, u); //pointing to camera up
+
 		//Calculate the vectors across the horizontal and down the vertical viewport edges.
-		auto viewport_u = vec3(viewport_width, 0, 0);
-		auto viewport_v = vec3(0, -viewport_height, 0);
+		vec3 viewport_u = viewport_width * u;
+		vec3 viewport_v = -viewport_height * v;
 
 		//Calculate the horizontal and vertical delta vectors from pixel to pixel.
 		pixel_delta_u = viewport_u / image_width;
 		pixel_delta_v = viewport_v / image_height;
 
 		//Calculate the horizontal and vertical delta vectors from pixel to pixel.
-		const auto& viewport_upper_left = camera_center - vec3(0, 0, focal_length) - 0.5 * viewport_u - 0.5 * viewport_v;
+		const point3& viewport_upper_left = center - (focus_dist * w) - 0.5 * viewport_u - 0.5 * viewport_v;
 		pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
 
+		//Calculate the camera defocus disk basis vectors
+		double defocus_radius = focus_dist * std::tan(degrees_to_radians(0.5 * defocus_angle));
+		defocus_disk_u = u * defocus_radius;
+		defocus_disk_v = v * defocus_radius;
 	}
 
 	ray get_ray(int i, int j) const {
-		// Construct a camera ray originating from the origin and directed at randomly sampled
+		// Construct a camera ray originating from the defocus disk and directed at randomly sampled
 		// point around the pixel location i, j.
 		vec3 offset = sample_square();
 		point3 pixel_sample = pixel00_loc + 
 			(i + offset[0]) * pixel_delta_u +
 			(j + offset[1]) * pixel_delta_v;
-		point3 ray_origin = center;
+		point3 ray_origin = (defocus_angle <= 0) ? center : defocus_disk_sample();
 		vec3 ray_direction = pixel_sample - ray_origin;
 
 		return ray(ray_origin, ray_direction);
@@ -85,14 +109,23 @@ private:
 		return vec3(random_double() - 0.5, random_double() - 0.5, 0);
 	}
 
+	point3 defocus_disk_sample() const {
+		//Returns a random point in the camera defocus disk.
+		point3 p = random_in_unit_disk();
+		return center + (p[0] * defocus_disk_u) + (p[1] * defocus_disk_v);
+	}
+
 	color ray_color(const ray& r, int depth, const hittable& world) const {
 		//If we've exceeded the ray bounce limit, no more light is gathered.
 		if (depth <= 0) return color(0, 0, 0);
 
 		hit_record rec;
 		if (world.hit(r, interval(0.001, infinity), rec)) {
-			vec3 direction = rec.normal + random_unit_vector();
-			return 0.5 * ray_color(ray(rec.p, direction), depth - 1, world);
+			ray scattered;
+			color attenuation;
+			if (rec.mat->scatter(r, rec, attenuation, scattered))
+				return attenuation * ray_color(scattered, depth - 1, world);
+			return color(0, 0, 0);
 		}
 
 		//Background

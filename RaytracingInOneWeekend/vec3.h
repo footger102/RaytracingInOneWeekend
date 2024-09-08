@@ -46,6 +46,12 @@ public:
 	static vec3 random_vec3(double min, double max) {
 		return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
 	}
+
+	bool near_zero() const {
+		//Return true if the vector is close to zero in all dimensions.
+		double s = 1e-8;
+		return (abs(e[0]) < s) and (abs(e[1]) < s) and (abs(e[2]) < s);
+	}
 };
 
 using point3 = vec3;
@@ -108,4 +114,22 @@ inline vec3 random_on_hemisphere(const vec3& normal) {
 	vec3 on_unit_sphere = random_unit_vector();
 	if (dot(on_unit_sphere, normal) > 0.0) return on_unit_sphere;
 	else return -on_unit_sphere;
+}
+
+inline vec3 reflect(const vec3& v, const vec3& n) {
+	return v - 2 * dot(v, n) * n;
+}
+
+inline vec3 refract(const vec3& uv, const vec3& n, double etai_over_etat) {
+	double cos_theta = std::fmin(dot(-uv, n), 1.0);
+	vec3 r_out_perp = etai_over_etat * (uv + cos_theta * n);
+	vec3 r_out_parallel = -sqrt(abs(1.0 - r_out_perp.norm_square())) * n;
+	return r_out_perp + r_out_parallel;
+}
+
+inline vec3 random_in_unit_disk() {
+	while (true) {
+		vec3 p = vec3(random_double(-1, 1), random_double(-1, 1), 0);
+		if (p.norm() < 1.0) return p;
+	}
 }
